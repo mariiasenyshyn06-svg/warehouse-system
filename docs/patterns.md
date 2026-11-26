@@ -31,11 +31,14 @@
 Якщо створювати їх через `if / elif` по всьому коду, додавання нового типу
 (наприклад, повернення) вимагатиме змін у багатьох місцях.
 
-**Рішення.** Абстрактний клас `StockOperation` описує загальну операцію,
-а підкласи `Incoming`, `Outgoing` і `WriteOff` реалізують її особливості.
-Об'єкт потрібного типу створює `MovementFactory.create(type)`.
+**Рішення.** Абстрактний творець `OperationCreator` містить загальний метод
+`process()` і абстрактний фабричний метод `create_operation()`.
+Кожен підклас-творець (`IncomingCreator`, `OutgoingCreator`, `WriteOffCreator`)
+перевизначає фабричний метод і створює свій продукт: `Incoming`, `Outgoing`
+або `WriteOff`. Усі продукти успадковують абстрактний клас `StockOperation`.
 
-**Класи:** `StockOperation`, `Incoming`, `Outgoing`, `WriteOff`, `MovementFactory`.
+**Класи:** `OperationCreator`, `IncomingCreator`, `OutgoingCreator`, `WriteOffCreator`,
+`StockOperation`, `Incoming`, `Outgoing`, `WriteOff`.
 
 ## 3. Builder (Будівельник)
 
